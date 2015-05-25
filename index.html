@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Alexandre Masy - Camera recorder demo</title>
+
+    <link rel="stylesheet" href="statics/styles/vendors.css"/>
+	<link rel="stylesheet" href="statics/styles/app.css"/>
+</head>
+<body>
+	
+	<div id="main">
+
+        <div id="first-row">
+            <a id="logo" href="http://alexandremasy.com" title="alexandremasy.com">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="1048px" height="954px" viewBox="0 0 1048 954" enable-background="new 0 0 1048 954" xml:space="preserve">
+                    <path d="M189.89,713.77C272.94,527.76,355.95,341.73,439.02,155.72c7.37-0.04,14.75,0.02,22.12-0.03
+                    c34.25,74.95,68.051,150.11,102.16,225.12c16.82,37.34,33.91,74.56,50.62,111.959c-22.68,9-45.479,17.73-68.16,26.74
+                    C528.7,483,512.26,446.19,495.44,409.56c-14.9-32.68-29.82-65.339-44.69-98.03c-0.66,0.76-1.24,1.57-1.73,2.44
+                    C397.03,428.38,345.08,542.81,293.09,657.22c-7.76,17.33-15.87,34.511-23.41,51.931c11.96-3.841,23.47-9,35.25-13.37
+                    C485.8,625.4,666.68,555.03,847.55,484.63c6.101-2.09,11.891-5.149,18.19-6.63c9.88,24.06,20.41,47.85,30.22,71.93
+                    C673.75,633.4,451.48,716.71,229.26,800.16c-1.67,0.64-3.48,0.52-5.23,0.56c-24.39-0.1-48.79,0.08-73.18-0.09
+                    C163.3,771.42,177.11,742.83,189.89,713.77z"/>
+                    <path d="M640.43,728.03c22.62-9,45.351-17.71,67.94-26.75c15.58,32.92,30.43,66.22,45.57,99.359
+                    c-26.761,0.061-53.521,0.16-80.271-0.05C662.66,776.37,651.41,752.26,640.43,728.03z"/>
+                </svg>
+                <span>Camera recorder demo</span>
+            </a>
+        </div>
+
+		<div id="player" class="">
+            <div class="container">
+    	    	<video id="video" autoplay loop controls muted></video>
+
+                <div class="display">
+                    <img src="/statics/images/camera.svg">
+
+                    <div class="light"></div>
+                </div>
+
+                <div class="controls">
+                    <a href="#" id="record">
+                        <span class="outer"></span>
+                        <span class="middle"></span>
+                        <span class="inner"></span>
+                    </a>
+                </div>                
+            </div>
+
+            <div class="legend">
+                <p class="normal">Press the button to start the recording</p>
+                <p class="recording">Press the button to stop the recording</p>
+                <p class="active">Here is the recorded video. Reload the page to retry. <br>The link to the video is: <span id="video-url-preview"></span></p>
+            </div>
+
+		</div>
+	</div>
+
+<script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
+<script src="https://cdn.webrtc-experiment.com/getScreenId.js"></script>
+<script type="text/javascript">
+var player = document.getElementById('player');
+var recordVideo = document.getElementById('record');
+var video = document.getElementById('video');
+var canvasWidth = 320;
+var canvasHeight = 240;
+var videoConstraints = {
+	audio: true,
+	video: {
+		mandatory: {},
+		optional: []
+	}
+}
+
+var recording = false;
+
+</script>
+
+<script type="text/javascript">
+recordVideo.onclick = function()
+{
+    if ( recording )
+    {
+        stop();
+    }    
+    else
+    {
+        start();
+    }
+
+}
+
+function start ()
+{
+    recording = true;
+
+    navigator.getUserMedia(videoConstraints, function(stream) {
+        video.onloadedmetadata = function() {
+            video.width = 320;
+            video.height = 240;
+
+            var options = {
+                type: 'video',
+                video: video,
+                canvas: {
+                    width: 320,
+                    height: 240
+                },
+                disableLogs: false,
+                recorderType: null // to let RecordRTC choose relevant types itself
+            };
+
+            recorder = window.RecordRTC(stream, options);
+            recorder.startRecording();
+
+            player.className = '-recording';
+            
+            video.onloadedmetadata = false;
+        };
+        video.src = URL.createObjectURL(stream);
+    }, 
+    function() 
+    {
+           alert('Webcam access is denied.');
+    });
+
+    window.isAudio = false;
+
+    
+    // recordVideo.disabled = true;
+    // stopRecordingVideo.disabled = false;
+    // pauseResumeVideo.disabled = false;
+}
+
+function stop()
+{
+    this.disabled = true;
+    recordVideo.disabled = false;
+
+    if (recorder)
+        recorder.stopRecording(function(url) {
+        video.src = url;
+        video.play();
+
+        document.getElementById('video-url-preview').innerHTML = '<a href="' + url + '" target="_blank">Recorded Video URL</a>';
+    });
+
+    player.className = '-active';
+
+}
+
+
+</script>
+
+</body>
+</html>
