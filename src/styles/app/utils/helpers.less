@@ -1,0 +1,200 @@
+/**
+ * 	Some helpers and utilities
+ *	
+ *	@author Alexandre Masy
+ */
+
+//===========/----------------------------------------------
+//  [_DIS]  /  Display
+//=========/------------------------------------------------
+.hidden
+{
+	display: none;
+}
+
+.clear
+{
+	clear: both;
+	display: block;
+}
+
+.block
+{
+	display: block;
+}
+.inline-block
+{
+	display: inline-block;
+}
+
+.no-scroll
+{
+	overflow: hidden;
+
+	// &.touch
+	// {	
+	// 	position: fixed;
+	// }
+}
+
+//===========/----------------------------------------------
+//  [_STY]  /  Style
+//=========/------------------------------------------------
+.underline
+{
+	text-decoration: underline;
+}
+.bold
+{
+	font-weight: bold;
+}
+
+
+//===========/----------------------------------------------
+//  [_ALI]  /  Alignements
+//=========/------------------------------------------------
+.center
+{
+	text-align: center;
+}
+
+/**
+ *	Vertical align
+ *	@exemple
+ 		<div class="vcenter"><!--
+			--><span class="item empty"></span><!--
+			--><span class="item">Centered</span><!--
+		--></div>
+ */
+.vcenter
+{
+	.item
+	{
+		vertical-align: middle;
+		display: inline-block;
+		&.empty
+		{
+			width:0;
+			height:100%;
+		}
+	}
+}
+
+//===========/----------------------------------------------
+//  [_FOR]  /  Forms
+//=========/------------------------------------------------
+// Set placeholder color
+.placeholder( @color: #ffffff )
+{
+	&::-webkit-input-placeholder { /* WebKit browsers */
+	    color: @color;
+	}
+	&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	    color: @color;
+	}
+	&::-moz-placeholder { /* Mozilla Firefox 19+ */
+	    color: @color;
+	}
+	&:-ms-input-placeholder { /* Internet Explorer 10+ */
+	    color: @color;
+	}
+}
+
+//===========/----------------------------------------------
+//  [_TYP]  /  Typography
+//=========/------------------------------------------------
+
+.font-size( @px )
+{
+	font-size: unit(@px/@font-base,rem);
+}
+
+.line-height( @px )
+{
+	line-height: unit(@px/@font-base,rem);
+}
+
+.text-shadow( @color: #db6300, @y:2px )
+{
+	text-shadow:0px @y 0px @color;
+}
+
+.text-stroke ( ... )
+{
+  -webkit-text-stroke: @arguments;
+  -moz-text-stroke: @arguments;
+  -o-text-stroke: @arguments;
+  -ms-text-stroke: @arguments;
+  text-stroke: @arguments;
+}
+
+.text-stroke-shadow( @thickness:1, @color:#000 )
+{
+    text-shadow:
+		unit(-@thickness,px) unit(-@thickness,px) 0 @color,  
+		unit(@thickness,px) unit(-@thickness,px) 0 @color,
+		unit(-@thickness,px) unit(@thickness,px) 0 @color,
+		unit(@thickness,px) unit(@thickness,px) 0 @color;
+}
+
+//===========/----------------------------------------------
+//  [_OTH]  /  Others
+//=========/------------------------------------------------
+.no-select
+{
+	user-select: none;
+	-o-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+}
+
+.border-radius( @radius:5px )
+{
+	border-radius: @radius;
+}
+
+.box-shadow()
+{
+	box-shadow: 0px 0px 10px 0px fade(@col_text, 30%);
+}
+
+.transition( @value )
+{
+	transition: @value cubic-bezier(.77,0,.175,1);
+}
+
+.vertical-gradient (@startColor: #eee, @endColor: white) 
+{
+	background: @startColor; /* Old browsers */
+	background: -moz-linear-gradient(top,  @startColor 0%, @endColor 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@startColor), color-stop(100%,@endColor)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  @startColor 0%,@endColor 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  @startColor 0%,@endColor 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  @startColor 0%,@endColor 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  @startColor 0%,@endColor 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=0 ); /* IE6-9 */
+}
+
+.horizontal-gradient (@startColor: #eee, @endColor: white) 
+{
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+
+.radial-gradient(@startColor: #eee, @endColor: white)
+{
+	background: @startColor; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  @startColor 0%, @endColor 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,@startColor), color-stop(100%,@endColor)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  @startColor 0%,@endColor 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  @startColor 0%,@endColor 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  @startColor 0%,@endColor 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  @startColor 0%,@endColor 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}

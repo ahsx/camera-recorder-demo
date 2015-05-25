@@ -1,0 +1,84 @@
+/**
+ *	Fonts declarations
+ *	
+ *	@author Alexandre Masy
+ */
+
+/* ===========/---------------------------------------------- */
+/*   [_FF]   /  FontFace 									  */
+/* =========/------------------------------------------------ */
+@ff_Arial: 			Arial, Helvetica, sans-serif;
+@ff_Roboto: 		'Roboto', sans-serif;
+@ff_Baskerville: 	'Libre Baskerville', serif;
+
+/* ===========/---------------------------------------------- */
+/*   [_ROB]  /  Roboto */
+/* =========/------------------------------------------------ */
+
+.roboto()
+{
+	font-family: @ff_Roboto;
+	font-weight: 400;
+	font-style: normal;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.roboto-bold()
+{
+	font-family: @ff_Roboto;
+	font-weight: 700;
+	font-style: normal;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.roboto-light()
+{
+	font-family: @ff_Roboto;
+	font-weight: 300;
+	font-style: normal;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.roboto{ .roboto(); }
+.roboto-bold{ .roboto-bold(); }
+.roboto-light{ .roboto-light(); }
+
+/* ===========/---------------------------------------------- */
+/*   [_BAS]  /  Libre Baskerville							  */
+/* =========/------------------------------------------------ */
+
+.baskerville()
+{
+	font-family: @ff_Baskerville;
+	font-weight: 400;
+	font-style: normal;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.baskerville{ .baskerville(); }
+
+/* ===========/---------------------------------------------- */
+/*   [_ICO]  /  IcoMoon */
+/* =========/------------------------------------------------ */
+
+// @ff_icon: 		'icomoon';
+
+// .icomoon()
+// {
+// 	font-family: @ff_icon;
+// }
+// .icomoon{ .icomoon(); }
+
+// @import (inline) "../../../../public/statics/fonts/icomoon/style.css";

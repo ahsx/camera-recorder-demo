@@ -1,0 +1,126 @@
+html, body
+{
+	font-size: unit(@font-base, px);
+	color: @col_black;
+	overflow-x: hidden;
+	height: 100%;
+
+	#main
+	{
+		height: 100%;
+		width: 100%;
+
+		background: @col_lightgrey;
+	}
+}
+
+*
+{
+	outline: none;
+	box-sizing: border-box;
+	vertical-align: top;
+	white-space: normal;
+	
+	&:focus {outline:none;}
+	&::-moz-focus-inner {border:0;}
+}
+
+
+@ie8: \0screen;
+@media @ie8 
+{
+  	img 
+  	{ 
+  		width: auto 
+  	}
+}
+
+/*********************************************************
+ *
+ *						Typography
+ *
+ *********************************************************/
+
+h1, .h1
+{
+	.baskerville();
+	.font-size(64px);
+}
+
+h2, .h2
+{
+	.roboto-bold();
+	.font-size(55px);
+	.line-height(50px);
+
+	@media @sm, @xs
+	{
+		.font-size(24px);
+		.line-height(20px);
+	}
+}
+
+h3, .h3
+{
+	
+}
+
+h4, .h4
+{
+	
+}
+
+h5, .h5
+{
+	
+}
+
+
+p
+{
+}
+
+a
+{
+	
+}
+
+img
+{
+	&.p50
+	{
+		width: 50%;
+		height: auto;
+	}
+
+	&.p60
+	{
+		width: 60%;
+		height: auto;
+	}
+
+	&.p70
+	{
+		width: 70%;
+		height: auto;
+	}
+
+	&.p80
+	{
+		width: 80%;
+		height: auto;
+	}
+
+	&.p90
+	{
+		width: 90%;
+		height: auto;
+	}
+
+	&.p100
+	{
+		width: 100%;
+		height: auto;
+	}
+}
+
